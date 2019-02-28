@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
-// import { LOCALE_ID } from '@angular/core'; 
+import { FormsModule } from "@angular/forms";
 
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
@@ -40,6 +40,7 @@ import { OrderComponent } from './order/order.component';
   imports: [
     BrowserModule,
     HttpModule,
+    FormsModule,
     RouterModule.forRoot(ROUTES)
   ],
   providers: [RestaurantsService,
