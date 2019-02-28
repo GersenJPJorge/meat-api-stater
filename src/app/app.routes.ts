@@ -5,6 +5,7 @@ import { RestaurantsComponent } from "./restaurants/restaurants.component";
 import { RestaurantDetailComponent } from "./restaurant-detail/restaurant-detail.component";
 import { MenuComponent } from "./restaurant-detail/menu/menu.component";
 import { ReviewsComponent } from "./restaurant-detail/reviews/reviews.component";
+import { OrderComponent } from "./order/order.component";
 
 export const ROUTES: Routes = [
     {path: '', component: HomeComponent }, // componente padrão caso não se digite nada
@@ -15,6 +16,7 @@ export const ROUTES: Routes = [
                 {path: 'menu',  component: MenuComponent},          // após "restaurants/id"
                 {path: 'reviews',  component: ReviewsComponent},
             ] },
+    {path: 'order', component: OrderComponent },
     {path: 'about', component: AboutComponent },
 ]
 // com a alteração do children devemos ir no componente principal de restaurant-detail e colocar o router-outlet para
