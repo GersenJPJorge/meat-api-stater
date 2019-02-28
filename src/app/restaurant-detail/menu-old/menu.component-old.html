@@ -1,0 +1,21 @@
+
+
+
+
+<div class="col-md-9 col-xs-12">
+
+    <mt-menu-item *ngFor="let item of menu | async"
+                          [menuItem]="item" (add)="addMenuItem($event)"></mt-menu-item>
+    <!-- o async vai se inscrever no menu, que é um observable, vai pegar os itens, passar para o ngfor e iterar --> 
+    <!-- quando foi dado o emite no componente individual, foi enviado um objeto, e esse objeto eu pego através da 
+         expressao $event-->
+    <!-- o método addMenuItem será criado em menu.componente.ts-->                          
+  
+    <!-- /.info-box -->
+
+</div>
+<div class="col-md-3 col-xs-12">
+  <!--INICIO DO CARRINHO-->
+  <mt-shopping-cart></mt-shopping-cart>
+<!-- FIM DO CARRINHO -->
+</div>
