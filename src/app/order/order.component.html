@@ -120,7 +120,8 @@
 
                       <div class="form-group">
 
-                        <mt-radio [options]="paymentOptions">  </mt-radio>
+                        <mt-radio [options]="paymentOptions" name="paymentOption" ngModel>  </mt-radio>
+                        <!-- sempre precisa do atributo "name" quando se usao o ngModel-->
 
                        </div>
 
