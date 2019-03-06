@@ -15,10 +15,22 @@ export class ShoppingCartService {
 
         // vou receber um item como parametro e vou testar de so id do menuitem é igual e ele
         if(foundItem){
-            foundItem.quantity = foundItem.quantity + 1
+            this.increaseQty(foundItem)
         }else{
             this.items.push(new CartItem(item))
         }                                      
+    }
+
+
+    increaseQty(item: CartItem){
+        item.quantity = item.quantity + 1
+    }
+
+    decreaseQty(item: CartItem){
+        item.quantity = item.quantity -1 
+        if(item.quantity === 0 ){
+            this.removeItem(item)
+        }
     }
 
     removeItem(item: CartItem){     // um método para remover itens
