@@ -43,6 +43,7 @@ remove(item: CartItem){
                                 JSON.stringify(order),
                                 new RequestOptions({headers: headers}))
                                 .map(response=> response.json())
+                                .map(order=> order.id) // poderia ter alterado no obseervalble<Order> mas foi feito aqui como exemplo
                                 //todos esses metodos retornam observable.response, mas não queremos todos os dados do response.
                                 // então vamos transformar oobsjeto response para uma representalçao json da resposta - no nosso
                                 // caso o backend só vai retornar u  objeto, que é o id. 

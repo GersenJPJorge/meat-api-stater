@@ -3,6 +3,7 @@ import { RadioOption } from 'app/shared/radio/radio.model';
 import { OrderService } from './order.service';
 import { CartItem } from 'app/restaurant-detail/shopping-cart/shopping-cart-item.model';
 import { Order, OrderItem } from './order.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mt-order',
@@ -22,7 +23,8 @@ export class OrderComponent implements OnInit {
   
   ]
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService,
+              private router: Router) { } // para rotear via programa precisa do router
 
   ngOnInit() {
   }
@@ -33,8 +35,6 @@ export class OrderComponent implements OnInit {
 itemsValue(): number {
   return this.orderService.itemsValue()
 }
-
-
 
 // expondo os itens
 cartItems(): CartItem[]{                 // isso é um método
@@ -61,7 +61,8 @@ cartItems(): CartItem[]{                 // isso é um método
       // e atribuindo esses items no objeto de compra
       this.orderService.checkOrder(order)
           .subscribe( (orderId: string) => {
-           console.log('Compra concluida: ${orderId}')
+            this.router.navigate(['/order-summary']) // roteando programaticamente
+ //          console.log(`Compra concluida: ${orderId}`)
            this.orderService.clear()   
       })      
       console.log(order)

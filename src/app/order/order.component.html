@@ -7,8 +7,8 @@
         <section class="invoice">
 
 
-          {{form.valid}} <!-- usando a template variable só para ver o status do form nos testes -->
-          {{form.value | json}} <!-- usando a template valuable só para ver o conteudo do form nos testes -->
+ <!--  {{form.valid}} -->       <!-- usando a template variable só para ver o status do form nos testes -->
+ <!--  {{form.value | json}}--> <!-- usando a template valuable só para ver o conteudo do form nos testes -->
 
               <form #form="ngForm" novalidate> <!-- #form é uma template variable-->
                   <!--por padrao, o angular já assume implicitamente a diretiva ngForm 
@@ -50,7 +50,7 @@
 
                   <div class="col-sm-3 col-xs-6">
                     <mt-input-container>
-                        <input type="text" class="form-control" name="optinalAddress" ngModel placeholder="Complemento" autocomplete="off">
+                        <input type="text" class="form-control" name="optionalAddress" ngModel placeholder="Complemento" autocomplete="off">
                       </mt-input-container>
                   </div>
 
