@@ -103,7 +103,11 @@
 
               <div class="row">
                 <div class="col-xs-12">
-                  <button href="order-summary.html" class="btn btn-success pull-right" [disabled]="!form.valid || cartItems() === 0">
+    <!--              <button href="order-summary.html" class="btn btn-success pull-right" [disabled]="!form.valid || cartItems() === 0
+                                                                                                || cartItems().length === 0">
+    -->
+                  <button href="order-summary.html" class="btn btn-success pull-right" [disabled]="!form.valid || cartItems().length === 0">
+                                                                                                
                     <i class="fa fa-credit-card"></i> Concluir Pedido
                   </button>
                 </div>
