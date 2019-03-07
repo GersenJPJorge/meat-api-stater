@@ -50,7 +50,7 @@
 
                   <div class="col-sm-3 col-xs-6">
                     <mt-input-container>
-                        <input type="text" class="form-control" name="optional" ngModel placeholder="Complemento" autocomplete="off">
+                        <input type="text" class="form-control" name="optinalAddress" ngModel placeholder="Complemento" autocomplete="off">
                       </mt-input-container>
                   </div>
 
@@ -106,8 +106,8 @@
     <!--              <button href="order-summary.html" class="btn btn-success pull-right" [disabled]="!form.valid || cartItems() === 0
                                                                                                 || cartItems().length === 0">
     -->
-                  <button href="order-summary.html" class="btn btn-success pull-right" [disabled]="!form.valid || cartItems().length === 0">
-                                                                                                
+                  <button (click)="checkOrder(form.value)" class="btn btn-success pull-right"
+                     [disabled]="!form.valid || cartItems().length === 0">
                     <i class="fa fa-credit-card"></i> Concluir Pedido
                   </button>
                 </div>

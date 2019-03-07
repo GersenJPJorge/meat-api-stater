@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RadioOption } from 'app/shared/radio/radio.model';
 import { OrderService } from './order.service';
 import { CartItem } from 'app/restaurant-detail/shopping-cart/shopping-cart-item.model';
+import { Order, OrderItem } from './order.model';
 
 @Component({
   selector: 'mt-order',
@@ -51,5 +52,21 @@ cartItems(): CartItem[]{                 // isso é um método
       this.orderService.remove(item)
     }    
 
-}
+    checkOrder(order: Order){
+      // agora é preciso pegar essa compra e adicionar os itens do carrinho como orderitems
+      // o .map transforma um item que é cartItem em orderitem, pegando só que é necessário  
+      order.orderItems = this.cartItems()
+                         .map((item:CartItem)=>new OrderItem(item.quantity, item.menuItem.id))
+      // estamos pegando um array de cartitem e transformando num array de orderitem e pegando os items
+      // e atribuindo esses items no objeto de compra
+      this.orderService.checkOrder(order)
+          .subscribe( (orderId: string) => {
+           console.log('Compra concluida: ${orderId}')
+           this.orderService.clear()   
+      })      
+      console.log(order)
 
+      //agora é preciso criar um método no  service que receba esse 0objeto(order) e mande para o servidor de backend             
+    }
+
+  }
