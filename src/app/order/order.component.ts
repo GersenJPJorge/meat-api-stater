@@ -4,7 +4,7 @@ import { OrderService } from './order.service';
 import { CartItem } from 'app/restaurant-detail/shopping-cart/shopping-cart-item.model';
 import { Order, OrderItem } from './order.model';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 
 @Component({
@@ -48,12 +48,25 @@ numberPattern = /^[0-9]*$/
       address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       number: this.formBuilder.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.formBuilder.control(''),
-      paymentOption: this.formBuilder.control('',  [Validators.required]),
+      paymentOption: this.formBuilder.control('',  [Validators.required])
       // com isso o template de input precisa ser alterado
       // precisa ser incluido o formControlName
-    })
+    }, {validator: OrderComponent.equalsTo})
   }
 
+  static equalsTo(group: AbstractControl): {[key:string]: boolean} {
+    const email = group.get('email')
+    const emailConfirmation = group.get('emailConfirmation')
+
+    if(!email.value || !emailConfirmation.value){ // se nenhum dos dois existir no grupo
+      return undefined
+    }
+
+    if(email.value !== emailConfirmation.value){ // se nenhum dos dois existir no grupo
+      return {emailsNotmatch: true}
+      }
+      return undefined
+    }
 
 // o valor do item já está implementado no carrinho de compras
 // será criado também o mesmo método em order.service mudando a assinatura
