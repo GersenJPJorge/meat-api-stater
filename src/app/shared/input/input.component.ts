@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ContentChild, AfterContentInit } from '@angular/core';
-import { NgModel } from "@angular/forms";
+import { NgModel, FormControlName } from "@angular/forms";
 
 @Component({
   selector: 'mt-input-container',
@@ -14,7 +14,10 @@ export class InputComponent implements OnInit, AfterContentInit {
 
   @ContentChild(NgModel) model: NgModel 
   // o parametro do contentchild pode ser uma referencia a um elemento ou uma diretiva, no nosso caso, uma diretiva
-  // feito isso temos que atribuir a direetiva model â minhas propriedades "input"
+  // feito isso temos que atribuir a diretiva model â minhas propriedades "input"
+  // a diretiva contentchild também pode ser feita uma referencia ao formcontrolname
+  @ContentChild(FormControlName) control: FormControlName 
+
 
 
   constructor() { }
@@ -27,9 +30,10 @@ export class InputComponent implements OnInit, AfterContentInit {
 
     //Called after ngOnInit when the component's or directive's content has been initialized.
     //Add 'implements AfterContentInit' to the class.
-    this.input = this.model
+    // nesse caso nao precisa tirar a diretiva ng model, e so adaptar
+    this.input = this.model || this.control
     if( this.input === undefined){
-        throw new Error('Esse componente precisa ser usado com uma diretiva ngModel')
+        throw new Error('Esse componente precisa ser usado com uma diretiva ngModel ou formControlName')
 
       } 
     

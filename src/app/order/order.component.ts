@@ -4,12 +4,16 @@ import { OrderService } from './order.service';
 import { CartItem } from 'app/restaurant-detail/shopping-cart/shopping-cart-item.model';
 import { Order, OrderItem } from './order.model';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'mt-order',
   templateUrl: './order.component.html',
 })
 export class OrderComponent implements OnInit {
+
+  orderForm: FormGroup // propriedade(objeto) que vai representar nosso formulário
 
   delivery: number = 8 
   // numa aplicação real esse valor viria de um backend
@@ -24,9 +28,26 @@ export class OrderComponent implements OnInit {
   ]
 
   constructor(private orderService: OrderService,
-              private router: Router) { } // para rotear via programa precisa do router
+              private router: Router, // para rotear via programa precisa do router
+              private formBuilder: FormBuilder) { } // precisa do formbuilder como injecao de dependencia
 
   ngOnInit() {
+    // dentro desse objeto vao propriedades que representam os input do formulário
+    this.orderForm = this.formBuilder.group({
+      // duas formas de preencher os campos:
+      // 1a - diretamente, como esta em name
+      //name: ''  
+      // 2a - usando um metodo do formbuilder chamado control
+      name: this.formBuilder.control(''),
+      email: this.formBuilder.control(''),
+      emailConfirmation: this.formBuilder.control(''),
+      address: this.formBuilder.control(''),
+      number: this.formBuilder.control(''),
+      optionalAddress: this.formBuilder.control(''),
+      paymentOption: this.formBuilder.control('')
+      // com isso o template de input precisa ser alterado
+      // precisa ser incluido o formControlName
+    })
   }
 
 
