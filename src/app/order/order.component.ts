@@ -4,7 +4,7 @@ import { OrderService } from './order.service';
 import { CartItem } from 'app/restaurant-detail/shopping-cart/shopping-cart-item.model';
 import { Order, OrderItem } from './order.model';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -12,6 +12,10 @@ import { FormGroup, FormBuilder } from '@angular/forms';
   templateUrl: './order.component.html',
 })
 export class OrderComponent implements OnInit {
+
+emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+
+numberPattern = /^[0-9]*$/ 
 
   orderForm: FormGroup // propriedade(objeto) que vai representar nosso formulário
 
@@ -38,13 +42,13 @@ export class OrderComponent implements OnInit {
       // 1a - diretamente, como esta em name
       //name: ''  
       // 2a - usando um metodo do formbuilder chamado control
-      name: this.formBuilder.control(''),
-      email: this.formBuilder.control(''),
-      emailConfirmation: this.formBuilder.control(''),
-      address: this.formBuilder.control(''),
-      number: this.formBuilder.control(''),
+      name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      email: this.formBuilder.control('', [Validators.pattern(this.emailPattern)]),
+      emailConfirmation: this.formBuilder.control('', [Validators.pattern(this.emailPattern)]),
+      address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
+      number: this.formBuilder.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.formBuilder.control(''),
-      paymentOption: this.formBuilder.control('')
+      paymentOption: this.formBuilder.control('',  [Validators.required]),
       // com isso o template de input precisa ser alterado
       // precisa ser incluido o formControlName
     })
