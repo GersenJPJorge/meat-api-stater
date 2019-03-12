@@ -177,6 +177,19 @@ No arquivo .angular-cli.json pode ser configurado pra não gerar o spec
 }
 }
 
+versão anterior 
+//
+//   "spec": {
+//      "class": false,
+ //     "component": true,
+  //    "directive": true,
+  //    "module": false,
+  //    "pipe": true,
+  //    "service": true
+  //  }
+//
+
+
 Configurando caminho raiz do projeto. Ao invés de usar './order/order.module.ts' da pra usar '@meat/order/order.module.ts'
 
 No arquivo tsconfig.json

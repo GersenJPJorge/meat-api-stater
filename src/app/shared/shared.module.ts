@@ -7,13 +7,15 @@ import { CommonModule } from "@angular/common"; // no modulo raiz ele já faz pa
 import { ShoppingCartService } from "app/restaurant-detail/shopping-cart/shopping-cart.service";
 import { RestaurantsService } from "app/restaurants/restaurants.service";
 import { OrderService } from "app/order/order.service";
+import { SnackbarComponent } from './messages/snackbar/snackbar.component';
 
 @NgModule({
     declarations: 
         // os componentes usam diretivas de formularios, logo precisam importam varios componentes relacionados,tais como formsmodule
         [InputComponent,
         RadioComponent,
-        RatingComponent],
+        RatingComponent,
+        SnackbarComponent],
     imports: 
         [FormsModule,
         ReactiveFormsModule,
@@ -22,6 +24,7 @@ import { OrderService } from "app/order/order.service";
         [InputComponent,
         RadioComponent,
         RatingComponent,
+        SnackbarComponent, // precisa disso se  quiser compartilhar com outras aplicações
         FormsModule,ReactiveFormsModule,CommonModule] // reimportando esses módulos, que chamar esse componente não vai precisar declará-los.   
 })
 export class SharedModule {
