@@ -145,3 +145,48 @@ Dependências dos pacotes que devem ficar em package.json:
 ## Créditos
 
 Todas as imagens usadas na aplicação são pertencentes a freepik.com
+
+
+
+
+
+
+Dica criando Module e Route via cli
+Danillo Tomaz · Aula 78 · há um ano
+Usar o comando para criar o modulo e a rota com o cli.
+ng g m nomeDoModulo --routing
+
+Não sei se mais a frente será demonstrado esta opção mas é uma sugestão pra quem não sabe.
+
+ng g c nomeDoComponente --is
+
+Este outro comando não gera o arquivo de CSS, logo não precisa ficar deletando ele.
+
+No arquivo .angular-cli.json pode ser configurado pra não gerar o spec
+
+"defaults": {
+...
+},
+"spec": {
+"class": false,
+"component": false,
+"directive": false,
+"module": false,
+"pipe": false,
+"service": false
+}
+}
+
+Configurando caminho raiz do projeto. Ao invés de usar './order/order.module.ts' da pra usar '@meat/order/order.module.ts'
+
+No arquivo tsconfig.json
+
+"compileOnSave": false,
+"compilerOptions": {
+
+"baseUrl": ".", //se o arquivo estiver dentro do src use . (ponto) caso for na pasta raiz onde tem os node_module use src no lugar do ponto.
+"paths": {
+"@meat/*": ["app/*"]
+"@env/*": ["environments/*"]
+},...
+}

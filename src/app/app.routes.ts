@@ -16,9 +16,10 @@ export const ROUTES: Routes = [
                 {path: 'menu',  component: MenuComponent},          // após "restaurants/id"
                 {path: 'reviews',  component: ReviewsComponent},
             ] },
-    {path: 'order', component: OrderComponent },
+    {path: 'order', loadChildren: './order/order.module#OrderModule' },
     {path: 'order-summary', component: OrderSummaryComponent },
     {path: 'about', loadChildren: './about/about.module#AboutModule'}
+//    {path: 'about', loadChildren: '@Meat/about/about.module#AboutModule'}
     ]
 // com a alteração do children devemos ir no componente principal de restaurant-detail e colocar o router-outlet para
 // testar a navegação 
