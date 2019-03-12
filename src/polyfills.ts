@@ -20,7 +20,7 @@ import 'zone.js/dist/zone';
 
 // necessários para o pipe currency na moeda nacional
 import 'intl';
-import 'intl/locale-data/jsonp/pt-BR.js'
+import 'intl/locale-data/jsonp/pt-BR.js';
 
 import 'web-animations-js/web-animations.min.js'
 
