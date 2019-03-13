@@ -8,6 +8,7 @@ import { ShoppingCartService } from "app/restaurant-detail/shopping-cart/shoppin
 import { RestaurantsService } from "app/restaurants/restaurants.service";
 import { OrderService } from "app/order/order.service";
 import { SnackbarComponent } from './messages/snackbar/snackbar.component';
+import { NotificationService } from "./messages/notitication.service";
 
 @NgModule({
     declarations: 
@@ -34,7 +35,8 @@ export class SharedModule {
                 providers: 
                 [ShoppingCartService,
                  RestaurantsService,
-                 OrderService] 
+                 OrderService,
+                 NotificationService] 
                     }
 // obs: Isso torna nosso core-module obsoleto
          // vamos tirá-lo do app.module e acrescentar o forRoot no sharedModule

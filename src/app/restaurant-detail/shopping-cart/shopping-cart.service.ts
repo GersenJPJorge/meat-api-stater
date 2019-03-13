@@ -1,9 +1,17 @@
 import { CartItem } from "./shopping-cart-item.model";
 import { MenuItem } from "../menu-item/menu-item.model";
-
-export class ShoppingCartService {
+import { Injectable } from "@angular/core";
+import { NotificationService } from "app/shared/messages/notitication.service";
+ 
+@Injectable()
+export class ShoppingCartService {                           //precisa do injectable porque vai chamar o NotificationService
 
     items:  CartItem[] = []              // uma coleção de itens do carrinho
+
+    constructor(private notificationService: NotificationService){    // o NotificationService precisa ser instanciado aqui
+
+    }
+
 
     clear(){                        // um método para limpar o carrinho 
          this.items = []            // recebe um array vazio    
@@ -18,7 +26,8 @@ export class ShoppingCartService {
             this.increaseQty(foundItem)
         }else{
             this.items.push(new CartItem(item))
-        }                                      
+        }   
+        this.notificationService.notify(`Voce adicionou o item ${item.name}`)  // cartItem                                 
     }
 
 
@@ -35,6 +44,7 @@ export class ShoppingCartService {
 
     removeItem(item: CartItem){     // um método para remover itens
         this.items.splice(this.items.indexOf(item), 1)  // removo um á partir daquele indice
+        this.notificationService.notify(`Voce removeu o item ${item.menuItem.name}`)  // menuItem   
     }
 
 
