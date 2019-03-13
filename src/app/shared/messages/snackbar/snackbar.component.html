@@ -1,3 +1,8 @@
-<div class="snackbar">
+
+<!--
+<button (click)="toggleSnack()"> </button> 
+só para testar a animação -->
+
+<div class="snackbar" [@snack-visibility]="snackVisibility">
   {{message}}
-</div>>
+</div>
