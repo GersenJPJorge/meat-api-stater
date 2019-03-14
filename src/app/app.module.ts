@@ -20,6 +20,7 @@ import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component'
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { SharedModule } from './shared/shared.module';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -46,8 +47,11 @@ import { NotFoundComponent } from './not-found/not-found.component';
     RouterModule.forRoot(ROUTES) // carrega os módulos principais e os lazyings em backgroud
      // o componente de compra não será carregado aqui, e sim nas rotas
   ],
-  providers: [FormBuilder,
-            {provide: LOCALE_ID, useValue: 'pt'}],
+  providers: [
+            {provide: LocationStrategy, useClass: HashLocationStrategy}, // Para acionar o index.html caso dê 404 no servidor
+            FormBuilder,
+            {provide: LOCALE_ID, useValue: 'pt'}
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
