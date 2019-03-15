@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Restaurant } from './restaurant/restaurant.model';
 import { RestaurantsService } from './restaurants.service';
 import {trigger, state, style, transition, animate} from '@angular/animations'
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms'; // para usar reactiveForms precisa desses imports
+import 'rxjs/add/operator/switchMap'
 
 @Component({
   selector: 'mt-restaurants',
@@ -25,12 +27,28 @@ export class RestaurantsComponent implements OnInit {
 
   restaurants: Restaurant[] 
 
+  searchForm: FormGroup                           // precisa de duas propriedades(objetos) para representar o formulário
+  searchControl: FormControl                      // precisa de duas propriedades(objetos) para representar o formulário
 
-  constructor(private restaurantsService: RestaurantsService) { }
+
+  constructor(private restaurantsService: RestaurantsService,
+              private fb: FormBuilder) { }   // precisa ser injetado uma instancia de formBuilder para trabalhar com reactiveForms
   /*  usando o construtor para instanciar minha classe de serviços para ser usado no componente*/
   /*  precisa ser declarado na lista de providers do app.modules.ts*/ 
 
   ngOnInit( ) {
+
+        this.searchControl = this.fb.control('')                        // vai começar com o texto vazio
+        this.searchForm = this.fb.group({                         // precisa ser instanciado por conta do reactiveForm
+             searchControl: this.searchControl                    
+        })
+
+        this.searchControl.valueChanges
+            .switchMap(searchTerm => // esse switchterm vem do primeiro observable
+              this.restaurantsService.restaurants(searchTerm)) // esse switcheterm é o que cliente digitou na busca
+              .subscribe(restaurants => this.restaurants = restaurants)          // esse subscribe é da segunda resposta
+
+
 
       this.restaurantsService.restaurants()
       .subscribe(restaurants => this.restaurants = restaurants)
