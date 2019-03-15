@@ -3,7 +3,10 @@ import { Restaurant } from './restaurant/restaurant.model';
 import { RestaurantsService } from './restaurants.service';
 import {trigger, state, style, transition, animate} from '@angular/animations'
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms'; // para usar reactiveForms precisa desses imports
-import 'rxjs/add/operator/switchMap'
+import 'rxjs/add/operator/switchMap';
+//import 'rxjs/add/operator/do'; // so para ver os resultados da querie no console
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
   selector: 'mt-restaurants',
@@ -44,9 +47,15 @@ export class RestaurantsComponent implements OnInit {
         })
 
         this.searchControl.valueChanges
-            .switchMap(searchTerm => // esse switchterm vem do primeiro observable
+          .debounceTime(500) // 500 milisegundos tempo entre identificar as novas doigitações
+          .distinctUntilChanged()
+//          .do(searchTerm=> console.log(`q=${searchTerm}`)) // só logar para ver o que está acontecendo
+          .switchMap(searchTerm => // esse switchterm vem do primeiro observable
               this.restaurantsService.restaurants(searchTerm)) // esse switcheterm é o que cliente digitou na busca
               .subscribe(restaurants => this.restaurants = restaurants)          // esse subscribe é da segunda resposta
+              
+              // importantissimo - com o switchamap uma querie não subscreve outra - No caso da web, uma querie demora e a outra não,
+              // a mais rapida não vai subscrever a mais demorada
 
 
 
