@@ -1,9 +1,5 @@
-
-
 import { Request, Response} from 'express'   // ajuda na tipagem e associa com req: e resp: que ajudam no auto-complete
-
-import { User, users } from './users';
-
+import { User, users } from './users'
 import * as jwt from 'jsonwebtoken'
 
 export const handleAuthentication = (req: Request, resp: Response)=>{    // importar o handleAuthentication no server.ts
@@ -11,7 +7,7 @@ export const handleAuthentication = (req: Request, resp: Response)=>{    // impo
 
     if(isValid(user)){
         const dbUser: User = users[user.email]
-        const token =  jwt.sign({sub: dbUser.email, iss: 'meta-api'}, 'met-api-password')
+        const token =  jwt.sign({sub: dbUser.email, iss: 'meat-api'}, 'meat-api-password')
         resp.json({name: dbUser.name, email: dbUser.email, accessToken: token})
     }else{
         resp.status(403).json({message: 'Dados inválidos.'}) 
