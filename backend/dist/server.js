@@ -4,7 +4,7 @@ var jsonServer = require("json-server");
 var fs = require("fs"); // capaz de ler os arquivos (file system) das 'keys'
 var https = require("https"); // capaz de ler os arquivos (file system) das 'keys'
 var auth_1 = require("./auth");
-//import {handleAuthorization} from './authz'
+var authz_1 = require("./authz");
 var server = jsonServer.create();
 var router = jsonServer.router('db.json');
 var middlewares = jsonServer.defaults();
@@ -18,7 +18,7 @@ server.use(jsonServer.bodyParser);
 //    resp.json({message: 'Ok'})            // pode ser retornado algo no objeto json - aqui é só para efeito de teste 
 //})
 server.post('/login', auth_1.handleAuthentication);
-//server.use('/orders', handleAuthorization)
+server.use('/orders', authz_1.handleAuthorization); //usando o 'use' para que essa rota sirva para qualquer outro método que não o post
 // Use default router
 server.use(router);
 var options = {

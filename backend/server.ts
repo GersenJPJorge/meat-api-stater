@@ -5,7 +5,7 @@ import * as fs from 'fs'                    // capaz de ler os arquivos (file sy
 import * as https from 'https'              // capaz de ler os arquivos (file system) das 'keys'
 
 import {handleAuthentication} from './auth'
-//import {handleAuthorization} from './authz'
+import { handleAuthorization } from './authz'
 
 const server: Express = jsonServer.create()
 const router = jsonServer.router('db.json')
@@ -25,7 +25,7 @@ server.use(jsonServer.bodyParser)
 //})
 
 server.post('/login', handleAuthentication)
-//server.use('/orders', handleAuthorization)
+server.use('/orders', handleAuthorization)   //usando o 'use' para que essa rota sirva para qualquer outro método que não o post
 
 // Use default router
 server.use(router)

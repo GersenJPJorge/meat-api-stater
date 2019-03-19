@@ -10,8 +10,7 @@ export class User {
     }             
     }
 
-export const users = {
-
+export const users: {[key:string]: User} = {     // (tipando) Um objeto onde a chave é do tipo string e o valor é do tipo User
     "juliana@gmail.com": new User('juliana@gmail.com', 'Juliana', 'juliana23'),
     "amanda@gmail.com": new User('amanda@gmail.com', 'Amanda', 'amanda21')
 }
