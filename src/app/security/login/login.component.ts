@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { loginService } from './login.service';
+import { LoginUser } from "./login.user.model"
+
 
 @Component({
   selector: 'mt-login',
@@ -10,7 +13,8 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private loginService: loginService) { }
 
   ngOnInit() {
     this.loginForm = this.fb.group({
@@ -19,5 +23,9 @@ export class LoginComponent implements OnInit {
 
     })
   }
-
+  login(){ // para receber o valor precisa do método subscribe
+    this.loginService.login(this.loginForm.value.email, 
+                            this.loginForm.value.password)
+                           .subscribe(LoginUser => console.log(LoginUser)) 
+  } 
 }
