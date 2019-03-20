@@ -7,10 +7,12 @@ import { ReviewsComponent } from "./restaurant-detail/reviews/reviews.component"
 import { OrderComponent } from "./order/order.component";
 import { OrderSummaryComponent } from "./order-summary/order-summary.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
+import { LoginComponent } from "./security/login/login.component";
 
 export const ROUTES: Routes = [
     {path: '', component: HomeComponent }, // componente padrão caso não se digite nada
     {path: 'restaurants', component: RestaurantsComponent },
+    {path: 'login', component: LoginComponent },
     {path: 'restaurants/:id', component: RestaurantDetailComponent,
             children: [
                 {path: '',  redirectTo: 'menu', pathMatch: 'full'}, // componente padrão caso não se digite nada 

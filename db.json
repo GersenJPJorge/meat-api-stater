@@ -374,7 +374,7 @@
     {
       "address": "Pontes",
       "number": "12",
-      "optinalAddress": "",
+      "optionalAddress": "",
       "paymentOption": "MON",
       "orderItems": [
         {
@@ -391,7 +391,7 @@
     {
       "address": "Pontes Vieira",
       "number": "100",
-      "optinalAddress": "",
+      "optionalAddress": "",
       "paymentOption": "MON",
       "orderItems": [
         {
@@ -408,7 +408,7 @@
     {
       "address": "12345",
       "number": "67",
-      "optinalAddress": "",
+      "optionalAddress": "",
       "paymentOption": "MON",
       "orderItems": [
         {
@@ -425,7 +425,7 @@
     {
       "address": "Pontes Vieira",
       "number": "100",
-      "optinalAddress": "",
+      "optionalAddress": "",
       "paymentOption": "MON",
       "orderItems": [
         {
@@ -442,7 +442,7 @@
     {
       "address": "Av. Santos Dumont",
       "number": "100",
-      "optinalAddress": "",
+      "optionalAddress": "",
       "paymentOption": "MON",
       "orderItems": [
         {
@@ -459,7 +459,7 @@
     {
       "address": "Av. Santos Dumont",
       "number": "100",
-      "optinalAddress": "",
+      "optionalAddress": "",
       "paymentOption": "MON",
       "orderItems": [
         {
@@ -476,7 +476,7 @@
     {
       "address": "123456",
       "number": "12",
-      "optinalAddress": "",
+      "optionalAddress": "",
       "paymentOption": "MON",
       "orderItems": [
         {
@@ -493,7 +493,7 @@
     {
       "address": "123456",
       "number": "12",
-      "optinalAddress": "",
+      "optionalAddress": "",
       "paymentOption": "MON",
       "orderItems": [
         {
