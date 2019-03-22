@@ -20,9 +20,7 @@ import { ReviewsComponent } from './restaurant-detail/reviews/reviews.component'
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 import { SharedModule } from './shared/shared.module';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { LoginComponent } from './security/login/login.component';
-
 
 @NgModule({
   declarations: [
@@ -50,7 +48,6 @@ import { LoginComponent } from './security/login/login.component';
      // o componente de compra não será carregado aqui, e sim nas rotas
   ],
   providers: [
-            {provide: LocationStrategy, useClass: HashLocationStrategy}, // Para acionar o index.html caso dê 404 no servidor
             FormBuilder,
             {provide: LOCALE_ID, useValue: 'pt'}
             ],

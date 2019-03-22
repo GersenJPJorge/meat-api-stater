@@ -12,7 +12,7 @@ export class ErrorHandler {
     }else{
       errorMessage = error.message ? error.message : error.toString()
     }
-    console.log(errorMessage)
+    console.log("errorMessage", errorMessage)
     return Observable.throw(errorMessage)
   }
 }

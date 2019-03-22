@@ -13,7 +13,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 })
 export class OrderComponent implements OnInit {
 
-emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+// emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
 numberPattern = /^[0-9]*$/ 
 
@@ -43,8 +43,8 @@ numberPattern = /^[0-9]*$/
       //name: ''  
       // 2a - usando um metodo do formbuilder chamado control
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-      email: this.formBuilder.control('', [Validators.pattern(this.emailPattern)]),
-      emailConfirmation: this.formBuilder.control('', [Validators.pattern(this.emailPattern)]),
+      email: this.formBuilder.control('', [Validators.required, Validators.email]),
+      emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.email]),
       address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       number: this.formBuilder.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.formBuilder.control(''),

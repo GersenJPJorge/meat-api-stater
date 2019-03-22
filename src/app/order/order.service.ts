@@ -3,15 +3,18 @@ import { ShoppingCartService } from "app/restaurant-detail/shopping-cart/shoppin
 import { CartItem } from "app/restaurant-detail/shopping-cart/shopping-cart-item.model";
 import { Observable } from "rxjs/Observable";
 import { Order, OrderItem} from "./order.model";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import 'rxjs/add/operator/map';
 import { MEAT_API } from "app/app.api";
+import { loginService } from "app/security/login/login.service";
 
 
 @Injectable()
 export class OrderService{
 
-    constructor(private cartService: ShoppingCartService, private http: HttpClient){}
+    constructor(private cartService: ShoppingCartService, 
+                private http: HttpClient,
+                private loginService: loginService){}
 
 itemsValue(): number {
     return this.cartService.total()
@@ -37,7 +40,12 @@ remove(item: CartItem){
 
  // aqui vamos usar chamadas http (precisa colocar também no construtor) e essas chamadas usam observables   
     checkOrder(order: Order): Observable<string>{
-        return this.http.post<Order>(`${MEAT_API}/orders`, order)
+        let headers = new HttpHeaders()
+        if(this.loginService.isLoggedIn()){
+            headers = headers.set('Authorization', `Bearer ${this.loginService.user.accessToken}`)
+
+        }
+        return this.http.post<Order>(`${MEAT_API}/orders`, order, {headers: headers})
                                 .map(order=> order.id)
 
                                 // método post tem algumas opções:

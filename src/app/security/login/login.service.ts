@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
-import { LoginUser } from "./login.user.model";
+import { LoginUser } from "./login.user.model"; // objeto que a gente vai receber do backend
 import 'rxjs/add/operator/do';
 import { MEAT_API } from "app/app.api";
 
