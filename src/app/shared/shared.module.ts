@@ -11,6 +11,7 @@ import { SnackbarComponent } from './messages/snackbar/snackbar.component';
 import { NotificationService } from "./messages/notitication.service";
 import { LoginService } from "app/security/login/login.service";
 import { LoggedInGuard } from "app/security/loggedin.guard";
+import { LeaveOrderGuard } from "app/order/leave-order.guard";
 
 @NgModule({
     declarations: 
@@ -40,6 +41,7 @@ export class SharedModule {
                  OrderService,
                  LoginService,
                  LoggedInGuard,
+                 LeaveOrderGuard,
                  NotificationService] 
                     }
 // obs: Isso torna nosso core-module obsoleto

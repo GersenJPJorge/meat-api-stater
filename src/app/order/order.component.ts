@@ -6,6 +6,8 @@ import { Order, OrderItem } from './order.model';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
+import 'rxjs/add/operator/do';
+
 
 @Component({
   selector: 'mt-order',
@@ -21,6 +23,8 @@ numberPattern = /^[0-9]*$/
 
   delivery: number = 8 
   // numa aplicação real esse valor viria de um backend
+
+  orderId: string
 
 
   paymentOptions: RadioOption[] = [
@@ -90,6 +94,10 @@ cartItems(): CartItem[]{                 // isso é um método
       this.orderService.remove(item)
     }    
 
+    isOrderCompleted(): boolean {
+      return this.orderId !== undefined
+    }
+
     checkOrder(order: Order){
       // agora é preciso pegar essa compra e adicionar os itens do carrinho como orderitems
       // o .map transforma um item que é cartItem em orderitem, pegando só que é necessário  
@@ -97,13 +105,17 @@ cartItems(): CartItem[]{                 // isso é um método
                          .map((item:CartItem)=>new OrderItem(item.quantity, item.menuItem.id))
       // estamos pegando um array de cartitem e transformando num array de orderitem e pegando os items
       // e atribuindo esses items no objeto de compra
+
       this.orderService.checkOrder(order)
-          .subscribe( (orderId: string) => {
+      .do((orderId: string) => {
+          this.orderId = orderId
+      })
+      .subscribe( (orderId: string) => {
             this.router.navigate(['/order-summary']) // roteando programaticamente
  //          console.log(`Compra concluida: ${orderId}`)
            this.orderService.clear()   
       })      
-      console.log(order)
+//      console.log(order)
 
       //agora é preciso criar um método no  service que receba esse 0objeto(order) e mande para o servidor de backend             
     }
