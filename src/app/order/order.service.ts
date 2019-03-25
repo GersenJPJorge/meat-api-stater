@@ -6,7 +6,7 @@ import { Order, OrderItem} from "./order.model";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import 'rxjs/add/operator/map';
 import { MEAT_API } from "app/app.api";
-import { loginService } from "app/security/login/login.service";
+import { LoginService } from "app/security/login/login.service";
 
 
 @Injectable()
@@ -14,7 +14,7 @@ export class OrderService{
 
     constructor(private cartService: ShoppingCartService, 
                 private http: HttpClient,
-                private loginService: loginService){}
+                private loginService: LoginService){}
 
 itemsValue(): number {
     return this.cartService.total()

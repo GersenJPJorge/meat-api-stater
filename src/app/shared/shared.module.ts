@@ -9,7 +9,8 @@ import { RestaurantsService } from "app/restaurants/restaurants.service";
 import { OrderService } from "app/order/order.service";
 import { SnackbarComponent } from './messages/snackbar/snackbar.component';
 import { NotificationService } from "./messages/notitication.service";
-import { loginService } from "app/security/login/login.service";
+import { LoginService } from "app/security/login/login.service";
+import { LoggedInGuard } from "app/security/loggedin.guard";
 
 @NgModule({
     declarations: 
@@ -37,7 +38,8 @@ export class SharedModule {
                 [ShoppingCartService,
                  RestaurantsService,
                  OrderService,
-                 loginService,
+                 LoginService,
+                 LoggedInGuard,
                  NotificationService] 
                     }
 // obs: Isso torna nosso core-module obsoleto

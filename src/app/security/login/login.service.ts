@@ -4,13 +4,15 @@ import { Observable } from "rxjs/Observable";
 import { LoginUser } from "./login.user.model"; // objeto que a gente vai receber do backend
 import 'rxjs/add/operator/do';
 import { MEAT_API } from "app/app.api";
+import { Router } from "@angular/router";
 
 @Injectable()
-export class loginService{
+export class LoginService{
 
     user: LoginUser //criando uma propriedade user para salvar o accessToken no operador 'do'
     
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient,
+                private router: Router){}
 
     // método para saber se o usuário está logado
     isLoggedIn(): boolean {
@@ -22,5 +24,9 @@ export class loginService{
                 {email: email, password:  password})
                 .do(user => this.user = user)
             }
+
+handleLogin(path?: string){    // opcional porque se ninguem passar vai para o '/'
+    this.router.navigate(['/login', path])
+}            
 
 }
