@@ -21,7 +21,7 @@ export const ROUTES: Routes = [
             ] },
     {path: 'restaurants', component: RestaurantsComponent },    // as rotas genéricas devem ficar por ultimo.
     {path: 'order', loadChildren: './order/order.module#OrderModule',
-            canLoad: [LoggedInGuard] }, // so faz sentido canload nas rotas tardias
+            canLoad: [LoggedInGuard], canActivate: [LoggedInGuard] }, // so faz sentido canload nas rotas tardias
     {path: 'order-summary', component: OrderSummaryComponent },
     {path: 'about', loadChildren: './about/about.module#AboutModule'},
     {path: '**', component: NotFoundComponent}                             // wildcard - quando não há nenhuma rota

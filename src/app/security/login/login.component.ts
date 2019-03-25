@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       password: this.fb.control('', [Validators.required])
 
     })
-    this.navigateTo = this.activatedRoute.snapshot.params['to'] || '/'
+    this.navigateTo = this.activatedRoute.snapshot.params['to'] || btoa('/') // encodar também
     // se nada for digitado vai para a raiz da aplicação
 
   }
@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
                                        response => // HttpErrorResponse - Já representa o erro da resposta 
                                         this.notificatioService.notify(response.error.message),
                                         ()=>{
-                                          this.router.navigate([this.navigateTo])
+                                          this.router.navigate([  atob(this.navigateTo)]) // desencoda 
 
                                         } )
 } 
