@@ -12,6 +12,8 @@ import { NotificationService } from "./messages/notitication.service";
 import { LoginService } from "app/security/login/login.service";
 import { LoggedInGuard } from "app/security/loggedin.guard";
 import { LeaveOrderGuard } from "app/order/leave-order.guard";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { authInterceptor } from "app/security/auth.interceptor";
 
 @NgModule({
     declarations: 
@@ -42,7 +44,8 @@ export class SharedModule {
                  LoginService,
                  LoggedInGuard,
                  LeaveOrderGuard,
-                 NotificationService] 
+                 NotificationService,
+                {provide: HTTP_INTERCEPTORS, useClass: authInterceptor, multi: true}] 
                     }
 // obs: Isso torna nosso core-module obsoleto
          // vamos tirá-lo do app.module e acrescentar o forRoot no sharedModule

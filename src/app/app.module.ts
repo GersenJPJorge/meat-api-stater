@@ -45,8 +45,8 @@ import { UserDetailComponent } from './header/user-detail/user-detail.component'
     BrowserAnimationsModule,
     HttpClientModule,
     SharedModule.forRoot(),
-//    RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}) // carrega os módulos principais e os lazyings em backgroud
-    RouterModule.forRoot(ROUTES) // carrega os módulos principais e os lazyings em backgroud
+    RouterModule.forRoot(ROUTES, {preloadingStrategy: PreloadAllModules}) // carrega os módulos principais e os lazyings em backgroud
+//    RouterModule.forRoot(ROUTES) // carrega os módulos principais e os lazyings em backgroud
      // o componente de compra não será carregado aqui, e sim nas rotas
   ],
   providers: [
