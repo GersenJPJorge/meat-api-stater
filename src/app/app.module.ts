@@ -4,7 +4,11 @@ import { FormBuilder } from "@angular/forms";
 
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, PreloadAllModules } from '@angular/router';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { registerLocaleData } from "@angular/common";
+import locatePt from "@angular/common/locales/pt";
+
+registerLocaleData(locatePt, 'pt');
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';

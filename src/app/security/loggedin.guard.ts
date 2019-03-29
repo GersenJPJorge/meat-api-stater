@@ -5,7 +5,6 @@ import { Injectable } from "@angular/core";
 @Injectable()
 export class LoggedInGuard implements CanLoad, CanActivate {
 
-
 // precisamos injetar o login service para verificar se ele se logou e est[a ok
 constructor(private loginService: LoginService){}
 
@@ -20,18 +19,14 @@ checkAuthentication(path: string): boolean {
 //       console.log(route)
 //        return false
               return loggedin
-
-
 }
 
 canLoad(route: Route): boolean {     
-       console.log('canload')                     
+//       console.log('canload')                     
        return this.checkAuthentication(route.path)}
 
 canActivate(activatedRoute: ActivatedRouteSnapshot, routerState: RouterStateSnapshot): boolean {
-       console.log('canActivate')                     
-
+//       console.log('canActivate')                     
        return this.checkAuthentication(activatedRoute.routeConfig.path) // o routeconfig é o objeto Router do método canLoad]
 }
-
 }

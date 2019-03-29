@@ -18,9 +18,9 @@ import 'core-js/es6/reflect';
 import 'core-js/es7/reflect';
 import 'zone.js/dist/zone';
 
-// necessários para o pipe currency na moeda nacional
-import 'intl';
-import 'intl/locale-data/jsonp/pt-BR.js';
+// necessários para o pipe currency na moeda nacional - não mais do angular 5 em diante
+//import 'intl';
+//import 'intl/locale-data/jsonp/pt-BR.js';
 
 import 'web-animations-js/web-animations.min.js'
 
