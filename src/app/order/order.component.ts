@@ -41,11 +41,7 @@ numberPattern = /^[0-9]*$/
 
   ngOnInit() {
     // dentro desse objeto vao propriedades que representam os input do formulário
-    this.orderForm = this.formBuilder.group({
-      // duas formas de preencher os campos:
-      // 1a - diretamente, como esta em name
-      //name: ''  
-      // 2a - usando um metodo do formbuilder chamado control
+    this.orderForm = new FormGroup({
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       email: this.formBuilder.control('', [Validators.required, Validators.email]),
       emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.email]),
@@ -53,9 +49,7 @@ numberPattern = /^[0-9]*$/
       number: this.formBuilder.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.formBuilder.control(''),
       paymentOption: this.formBuilder.control('',  [Validators.required])
-      // com isso o template de input precisa ser alterado
-      // precisa ser incluido o formControlName
-    }, {validator: OrderComponent.equalsTo})
+    }, {validators: [OrderComponent.equalsTo], updateOn: 'blur'})
   }
 
   static equalsTo(group: AbstractControl): {[key:string]: boolean} {
