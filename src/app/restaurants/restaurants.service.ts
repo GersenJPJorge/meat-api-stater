@@ -6,7 +6,6 @@ import { MEAT_API } from "../app.api";
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
-import { ErrorHandler } from "app/app.error-handler";
 import { MenuItem } from "app/restaurant-detail/menu-item/menu-item.model";
 
 @Injectable()
@@ -24,7 +23,6 @@ export class RestaurantsService {
           return this.http.get<Restaurant[]>(`${MEAT_API}/restaurants`, {params: params})
         }
           // As chamadas http só serçao feitas apos o subscribe - que é feito no componente 
-
         
     // novo método que retona um restaurante á partir do id e nçao mais um array de restaurantes
         restaurantById(id: string): Observable<Restaurant>{
