@@ -38,7 +38,7 @@ export class SnackbarComponent implements OnInit {
   ngOnInit() {                                                          // o ponto ideal para se inscreve é no ngOniti porque
                                                                         // todas as dependencias já foram carregadas
       this.notificationService.notifier
-            .do(message=>{
+            .do(message => {
                 this.message = message
                 this.snackVisibility = 'visible'
             }).switchMap(message => Observable.timer(3000))
