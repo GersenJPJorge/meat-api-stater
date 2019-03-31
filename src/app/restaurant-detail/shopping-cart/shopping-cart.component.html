@@ -22,7 +22,7 @@
               <th>  ({{item.quantity}}x)  {{item.menuItem.name}}</th>
               <!-- quantidade x itens -->
 
-              <td class="text-right">{{item.value() | currency: 'BRL': true}}</td>            <!-- item.value é um método -->
+              <td class="text-right">{{item.value() | currency: 'BRL': 'symbol'}}</td>            <!-- item.value é um método -->
             
         <!-- acrescentando um "x" ao lado do item, caso deseje removê-lo--> 
         

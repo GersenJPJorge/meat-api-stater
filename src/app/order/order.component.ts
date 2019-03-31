@@ -4,7 +4,7 @@ import { OrderService } from './order.service';
 import { CartItem } from 'app/restaurant-detail/shopping-cart/shopping-cart-item.model';
 import { Order, OrderItem } from './order.model';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 
 import 'rxjs/add/operator/do';
 
@@ -41,14 +41,23 @@ numberPattern = /^[0-9]*$/
 
   ngOnInit() {
     // dentro desse objeto vao propriedades que representam os input do formulário
+
     this.orderForm = new FormGroup({
+//      name: new FormControl ('', {
+//           validators: [Validators.required, Validators.minLength(5)]
+//           }),
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       email: this.formBuilder.control('', [Validators.required, Validators.email]),
       emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.email]),
       address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       number: this.formBuilder.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.formBuilder.control(''),
-      paymentOption: this.formBuilder.control('',  [Validators.required])
+      
+      paymentOption: new FormControl('', {
+        validators:[Validators.required],
+        updateOn: 'change'
+     
+      })
     }, {validators: [OrderComponent.equalsTo], updateOn: 'blur'})
   }
 
