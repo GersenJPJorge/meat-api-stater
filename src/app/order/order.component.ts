@@ -15,7 +15,7 @@ import 'rxjs/add/operator/do';
 })
 export class OrderComponent implements OnInit {
 
-// emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+emailPattern = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
 
 numberPattern = /^[0-9]*$/ 
 
@@ -47,8 +47,8 @@ numberPattern = /^[0-9]*$/
 //           validators: [Validators.required, Validators.minLength(5)]
 //           }),
       name: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
-      email: this.formBuilder.control('', [Validators.required, Validators.email]),
-      emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.email]),
+      email: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
+      emailConfirmation: this.formBuilder.control('', [Validators.required, Validators.pattern(this.emailPattern)]),
       address: this.formBuilder.control('', [Validators.required, Validators.minLength(5)]),
       number: this.formBuilder.control('', [Validators.required, Validators.pattern(this.numberPattern)]),
       optionalAddress: this.formBuilder.control(''),
@@ -65,7 +65,7 @@ numberPattern = /^[0-9]*$/
     const email = group.get('email')
     const emailConfirmation = group.get('emailConfirmation')
 
-    if(!email.value || !emailConfirmation.value){ // se nenhum dos dois existir no grupo
+    if(!email || !emailConfirmation){ // se nenhum dos dois existir no grupo
       return undefined
     }
 
