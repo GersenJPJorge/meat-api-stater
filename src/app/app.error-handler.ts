@@ -1,6 +1,7 @@
 
 import {HttpErrorResponse} from '@angular/common/http'
-import 'rxjs/add/observable/throw'
+// import { throwError } from "rxjs/operators"; trhow foi renomeado para throwError
+// import 'rxjs/add/observable/throw'
 import { ErrorHandler, Inject, Injectable, Injector, NgZone } from '@angular/core';
 import { NotificationService } from './shared/messages/notitication.service';
 import { LoginService } from './security/login/login.service';

@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { ShoppingCartService } from "app/restaurant-detail/shopping-cart/shopping-cart.service";
 import { CartItem } from "app/restaurant-detail/shopping-cart/shopping-cart-item.model";
-import { Observable } from "rxjs/Observable";
+import { Observable } from "rxjs";
 import { Order, OrderItem} from "./order.model";
 import { HttpClient } from "@angular/common/http";
-import 'rxjs/add/operator/map';
+import { map } from "rxjs/operators";
 import { MEAT_API } from "app/app.api";
 
 
@@ -39,7 +39,8 @@ remove(item: CartItem){
  // aqui vamos usar chamadas http (precisa colocar também no construtor) e essas chamadas usam observables   
     checkOrder(order: Order): Observable<string>{
         return this.http.post<Order>(`${MEAT_API}/orders`, order)
-                                .map(order=> order.id)
+                                .pipe(map(order=> order.id))
+                                
           }
 
     clear(){

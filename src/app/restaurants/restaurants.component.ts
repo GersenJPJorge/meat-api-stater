@@ -3,15 +3,10 @@ import { Restaurant } from './restaurant/restaurant.model';
 import { RestaurantsService } from './restaurants.service';
 import {trigger, state, style, transition, animate} from '@angular/animations'
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms'; // para usar reactiveForms precisa desses imports
-import 'rxjs/add/operator/switchMap';
-//import 'rxjs/add/operator/do'; // so para ver os resultados da querie no console
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/catch'; // para tratar funcções http
-import 'rxjs/add/observable/from'; // para criar uma string á partir de um array
-import { Observable } from 'rxjs/Observable';
 
-
+import { Observable, from} from "rxjs";
+import { tap, switchMap, debounceTime, distinctUntilChanged, catchError  } from "rxjs/operators";  
+// catch foi renomeada para catcherror
 
 @Component({
   selector: 'mt-restaurants',
@@ -52,17 +47,14 @@ export class RestaurantsComponent implements OnInit {
         })
 
         this.searchControl.valueChanges
-          .debounceTime(500) // 500 milisegundos tempo entre identificar as novas doigitações
-          .distinctUntilChanged()
-//          .do(searchTerm=> console.log(`q=${searchTerm}`)) // só logar para ver o que está acontecendo
-          .switchMap(searchTerm => // esse switchterm vem do primeiro observable
-              this.restaurantsService
-                  .restaurants(searchTerm) // esse switcheterm é o que cliente digitou na busca
-                  .catch(error=>Observable.from([]))) // nesse caso a querie deu erro mas não vai retornar nada para o nosso subscribe
-              .subscribe(restaurants => this.restaurants = restaurants)          // esse subscribe é da segunda resposta
-
-              // importantissimo - com o switchamap uma querie não subscreve outra - No caso da web, uma querie demora e a outra não,
-              // a mais rapida não vai subscrever a mais demorada
+        .pipe(
+          debounceTime(500),
+          distinctUntilChanged(),
+          switchMap(searchTerm =>
+            this.restaurantsService
+            .restaurants(searchTerm)
+            .pipe(catchError(error=>from([]))))
+        ).subscribe(restaurants => this.restaurants = restaurants)
 
 
 

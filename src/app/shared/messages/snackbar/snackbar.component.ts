@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, transition, style, animate } from '@angular/animations';
 import { NotificationService } from '../notitication.service';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/timer';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/switchMap';
+import { Observable, timer } from 'rxjs';
+
+import { tap, switchMap } from "rxjs/operators";  // substitui os operadores 'do' e 'switchmap'
 
 @Component({
   selector: 'mt-snackbar',
@@ -38,13 +37,16 @@ export class SnackbarComponent implements OnInit {
   ngOnInit() {                                                          // o ponto ideal para se inscreve é no ngOniti porque
                                                                         // todas as dependencias já foram carregadas
       this.notificationService.notifier
-            .do(message => {
+            .pipe(
+              tap(message => {
                 this.message = message
                 this.snackVisibility = 'visible'
-            }).switchMap(message => Observable.timer(3000))
-              .subscribe(timer => this.snackVisibility = 'hidden' )                                                                          
+            }),
+              switchMap(message => timer(3000))
+            ).subscribe(timer => this.snackVisibility = 'hidden' )                                                                          
      }                                                                                          
-                                                                                                 
+  }
+                                                                                                
 /* só para testar a animação
   toggleSnack(){
     this.snackVisibility = this.snackVisibility === 'hidden' ? 'visible' : 'hidden'
@@ -53,4 +55,3 @@ export class SnackbarComponent implements OnInit {
 */
 
 
-}

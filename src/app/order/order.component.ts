@@ -6,7 +6,7 @@ import { Order, OrderItem } from './order.model';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators, AbstractControl } from '@angular/forms';
 
-import 'rxjs/add/operator/do';
+import { tap } from 'rxjs/operators';
 
 
 @Component({
@@ -110,9 +110,8 @@ cartItems(): CartItem[]{                 // isso é um método
       // e atribuindo esses items no objeto de compra
 
       this.orderService.checkOrder(order)
-      .do((orderId: string) => {
-          this.orderId = orderId
-      })
+        .pipe(tap((orderId: string) => {
+          this.orderId = orderId}))
       .subscribe( (orderId: string) => {
             this.router.navigate(['/order-summary']) // roteando programaticamente
  //          console.log(`Compra concluida: ${orderId}`)
